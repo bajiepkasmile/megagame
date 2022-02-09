@@ -5,7 +5,7 @@ from model.player import Player
 from model.world import World
 
 app = FastAPI()
-world: World
+world = World()
 html = """
 <!DOCTYPE html>
 <html>

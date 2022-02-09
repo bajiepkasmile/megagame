@@ -12,7 +12,6 @@ class Player:
     y: int = 0
 
     def __init__(self, websocket: WebSocket) -> None:
-        super().__init__()
         self.websocket = websocket
         await websocket.accept()
         while True:
@@ -26,4 +25,4 @@ class Player:
         await self.websocket.send_text(world.string())
 
     def string(self):
-        return f"${self.x} ${self.y}"
+        return f"{self.x} {self.y}"

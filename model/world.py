@@ -6,16 +6,16 @@ class World:
     players: list
 
     def __init__(self) -> None:
-        super().__init__()
         start_time = time.time()
         while True:
             current_time = time.time()
             delta_time = current_time - start_time
-            if delta_time < 16:
+            if delta_time < 100:
                 continue
 
             start_time = current_time
-            count = int(delta_time / 16)
+            count = int(delta_time / 100)
+            start_time -= delta_time % 100
 
             for player in self.players:
                 for i in range(0, count):
@@ -25,7 +25,7 @@ class World:
     def string(self):
         world_str = ""
         for player in self.players:
-            world_str = f"${player.string()}\n"
+            world_str += f"{player.string()}\n"
         return world_str
 
     def add_player(self, player: Player):

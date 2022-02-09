@@ -9,9 +9,9 @@ class Speed:
         if self._up and self._down:
             return 0
         elif self._up:
-            return -10
+            return -5
         elif self._down:
-            return 10
+            return 5
         else:
             return 0
 
@@ -19,14 +19,14 @@ class Speed:
         if self._left and self._right:
             return 0
         elif self._left:
-            return -10
+            return -5
         elif self._right:
-            return 10
+            return 5
         else:
             return 0
 
     def handle_event(self, value: str):
-        parts = value.split("_")
+        parts = value.split("_") # start_left stop_left
 
         action_str = parts[0]
         pressed: bool
