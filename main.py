@@ -1,8 +1,11 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 
-app = FastAPI()
+from model.player import Player
+from model.world import World
 
+app = FastAPI()
+world: World
 html = """
 <!DOCTYPE html>
 <html>
@@ -45,7 +48,4 @@ async def get():
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
-    await websocket.accept()
-    while True:
-        data = await websocket.receive_text()
-        await websocket.send_text(f"Message text was: {data}")
+    world.add_player(Player(websocket))
