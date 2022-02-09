@@ -29,4 +29,4 @@ class World:
         return world_str
 
     def add_player(self, player: Player):
-        self.players.insert(0, player)
+        self.players.append(player)
