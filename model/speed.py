@@ -1,11 +1,11 @@
 class Speed:
 
-    _up: bool
-    _down: bool
-    _left: bool
-    _right: bool
+    _up: bool = False
+    _down: bool = False
+    _left: bool = False
+    _right: bool = False
 
-    def x(self):
+    async def x(self):
         if self._up and self._down:
             return 0
         elif self._up:
@@ -15,7 +15,7 @@ class Speed:
         else:
             return 0
 
-    def y(self):
+    async def y(self):
         if self._left and self._right:
             return 0
         elif self._left:
@@ -25,8 +25,8 @@ class Speed:
         else:
             return 0
 
-    def handle_event(self, value: str):
-        parts = value.split("_") # start_left stop_left
+    async def handle_event(self, value: str):
+        parts = value.split("_") # example: start_left stop_left
 
         action_str = parts[0]
         pressed: bool
