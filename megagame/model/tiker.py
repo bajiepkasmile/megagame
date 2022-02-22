@@ -1,7 +1,7 @@
 import asyncio
 import time
 
-TIK_TIME = 0.5
+TIK_TIME = 0.1
 
 
 class Tiker:
