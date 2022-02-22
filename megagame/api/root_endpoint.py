@@ -1,13 +1,9 @@
-import asyncio
-
-from fastapi import FastAPI, WebSocket
+from fastapi import APIRouter
+from fastapi_utils.cbv import cbv
 from fastapi.responses import HTMLResponse
 
-from ConnectionManager import manager
-from model.player import Player
-from model.world import World
 
-app = FastAPI()
+router = APIRouter()
 html = """
 <!DOCTYPE html>
 <html>
@@ -43,16 +39,9 @@ html = """
 """
 
 
-@app.get("/")
-async def get():
-    return HTMLResponse(html)
+@cbv(router)
+class RootEndpointHandler:
 
-world = World(manager=manager)
-@app.on_event("startup")
-async def main():
-    asyncio.create_task(world.start_game())
-
-@app.websocket("/ws/{client_id}")
-async def websocket_endpoint(websocket: WebSocket, client_id: int):
-    await world.add_player(Player(id=client_id, websocket=websocket))
-
+    @router.get('/', response_model_by_alias=False)
+    async def get_root_content(self):
+        return HTMLResponse(html)
